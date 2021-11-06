@@ -3,7 +3,7 @@ import pandas as pd
 from xml.etree import ElementTree as ET
 
 # Get the data files
-path = './VMRay Dataset/'
+path = 'C:/Users/samsung/Desktop/VMRay Dataset/'
 file_list = os.listdir(path)
 print(file_list)
 
@@ -34,7 +34,13 @@ for file in file_list:
     print('columns =', ['file_name', 'PID', 'Name', 'Parent_PID', 'Path'])
     df = pd.DataFrame({'file_name': file.replace('.xml', ''), 'PID': pid_list,
                        'Name': name_list, 'Parent_PID': parent_pid_list, 'Path': path_list})
-    df.to_csv('IoC_dataset.csv')
+    
+    # kyr, csv 저장 방식 수정
+    if (file == "04ad737a6336.xml"):
+        df.to_csv('IoC_dataset.csv')
+
+    else:
+        df.to_csv(r"IoC_dataset.csv", mode='a', header=False, index=False)
     print(df.head())
 
-    break  # '04ad737a6336.xml' 문서만 테스트
+    #break  # '04ad737a6336.xml' 문서만 테스트
