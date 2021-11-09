@@ -2,7 +2,7 @@
 - 가천대학교 소프트웨어학과
 - 2021년 2학기 사이버보안 (한명묵 교수) 팀프로젝트
 
-### promblem1
+### problem1
 < 데이터셋 >
 
 VMRay Dataset
@@ -17,5 +17,5 @@ VMRay Dataset
 - 본인이름 폴더 생성
 - 본인이름의 폴더에 cyberSecurity_본인이름.py
 
-### promblem2
+### problem2
 데이터셋 머신러닝 분석
