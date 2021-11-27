@@ -22,6 +22,7 @@ indicator = '{http://stix.mitre.org/Indicator-2}'
 
 # Result dataframe
 result = pd.DataFrame()
+duplicated_result = pd.DataFrame()
 
 # Extract artifacts values from all the 87 data files and make a .csv dataset file.
 for file in file_list:
@@ -63,6 +64,8 @@ for file in file_list:
                        'Process_Name': process_name_list, 'Parent_PID': parent_pid_list, 'Process_Path': process_path_list,
                        'File_Name': file_name_list, 'File_Path': file_path_list, 'Indicator_File_Name': indicator_name})
 
+    duplicated_result = duplicated_result.append(df)
+
     # Extract sum of values or representative value for each feature
     address = df['Address'].unique()
     if len(address) != 1:
@@ -92,6 +95,8 @@ for file in file_list:
     result = result.append(pd.DataFrame({'file_name': [xml_file_name], 'Address': [address], 'DNS': [dns], 'PID': [pid_num], 'Process_Name': [process_name],
                                          'Parent_PID': [parent_pid_num], 'Process_Path': [process_path], 'File': [file_num], 'File_Path': [file_path], 'Indicator_File_Name': [indicator_name]}), ignore_index=True)
 
+duplicated_result = pd.merge(duplicated_result, target_file, left_on='xml_file_name', right_on='file_name', how='inner').drop(['file_name'], axis=1)
+duplicated_result.to_csv('Duplicated_dataset.csv')
+
 result = pd.merge(result, target_file)
 result.to_csv('IoC_dataset.csv')
-print(result)
